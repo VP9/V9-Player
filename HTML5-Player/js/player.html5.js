@@ -392,7 +392,11 @@ VP9.playerHTML5 = function(player) {
 		}
     }
 
-    player.setPause = function() {}
+    player.setPause = function() {
+    	if (_this.player && !_this.player.paused) {
+			_this.player.pause();
+		}
+	}
 
 	player.setStop = function() {}
 
