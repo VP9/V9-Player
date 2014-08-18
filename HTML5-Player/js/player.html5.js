@@ -496,7 +496,9 @@ VP9.playerHTML5 = function(player) {
 	}
 
 
-	player.setAutoNext = function(auto) {}
+	player.setAutoNext = function(auto) {
+		player.options.autoNext = auto;
+	}
 
     player.addItem = function(data) {}
 
