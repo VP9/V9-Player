@@ -256,7 +256,23 @@ VP9.playerHTML5 = function(player) {
 		});
     }
 
-    this.ui.scale = function() {}
+    this.ui.scale = function() {
+    	//get size chỉ đúng khi thật sự play frame đầu tiên
+    	_this.$video.removeAttr('style').one('timeupdate', function() {
+    		if (this.currentTime > 0) {
+			    var videoRatio = this.videoWidth / this.videoHeight,
+			        tagRatio = player.options.ratio;
+			    if (videoRatio < tagRatio) {
+			        _this.$video.css('-webkit-transform','scaleX(' + tagRatio / videoRatio  + ')')
+			    } else if (tagRatio < videoRatio) {
+			        //_this.$video.css('-webkit-transform','scaleY(' + videoRatio / tagRatio  + ')')
+			    }
+    		}
+    		else {
+    			_this.ui.scale();
+    		}
+    	})
+    }
 
 	_this.ui.hideTimeout = null;
     this.ui.hideControls = function() {}
