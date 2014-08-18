@@ -386,7 +386,11 @@ VP9.playerHTML5 = function(player) {
     }
 
     //methods
-    player.setPlay = function() {}
+    player.setPlay = function() {
+    	if (_this.player && _this.player.paused) {
+			_this.player.play();
+		}
+    }
 
     player.setPause = function() {}
 
