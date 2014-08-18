@@ -328,10 +328,11 @@ VP9.playerHTML5 = function(player) {
 
 
     //Events
-    player.onReady = function(func) {
-    	_this.player.addEventListener('play', func);}
+    player.onReady = function(func) {}
 
-    player.onPlay = function(func) {}
+    player.onPlay = function(func) {
+    	_this.player.addEventListener('play', func);
+    }
 
     player.onFirstPlay = function(func) {}
 
