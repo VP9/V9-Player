@@ -360,7 +360,9 @@ VP9.playerHTML5 = function(player) {
     }
 
     var onSetVideo = [];
-    player.onSetVideo = function(func) {}
+    player.onSetVideo = function(func) {
+    	onSetVideo.push(func);
+    }
 
     player.onTimeupdate = function(func) {}
 
