@@ -500,7 +500,14 @@ VP9.playerHTML5 = function(player) {
 		player.options.autoNext = auto;
 	}
 
-    player.addItem = function(data) {}
+    player.addItem = function(data) {
+    	player.options.playlist.push(data);
+		_this.playlist = player.options.playlist.filter(function(item) {
+			return item;
+		});
+    	_this.ui.setVideo(player.activeVideo);
+    	return player.options.playlist.length - 1;
+    }
 
     player.removeItem = function(data) {}
 
