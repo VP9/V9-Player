@@ -421,7 +421,71 @@ VP9.playerHTML5 = function(player) {
 		_this.ui.setCurrentTime(time, _this.player.duration);
 	}
 
-	player.setVideo = function(item, seekTime) {}
+	player.setVideo = function(item, seekTime) {
+		player.setStop();
+		var id = player.ui.setVideo(item);
+
+		if (id !== false) {
+
+			var curentVideo = player.options.playlist[id][0];
+
+			// var typeStr = '';
+			// if (_this.player.canPlayType(curentVideo.type) != '') {
+			// 	typeStr = ' type="' + curentVideo.type + '"';
+			// }
+
+			_this.$video = $('<video />')
+				.attr({
+					'id' : player.id + '_media_html5',
+					'width': '100%',
+					'height': '100%',
+					/*'poster': '',
+					'loop': false,
+					'autoplay': false,
+					'preload': 'none',
+					'autobuffer': false,*/
+				})
+				.appendTo(player.$media);
+			_this.player = _this.$video[0];
+
+			_this.ui.onEvent();
+			_this.ui.setVideo(id);
+			_this.ui.autoPlay();
+			_this.ui.resume();
+
+		    if (player.options.scale) {
+				_this.ui.scale();
+			}
+
+		    $.each(onSetVideo, function(k, func) {
+		    	func.call(this, id);
+		    });
+
+		    if (seekTime) {
+		    	//curentVideo.src += '#t=' + seekTime;
+		    	player.on('firstPlay', function() {
+		    		_this.player.currentTime = seekTime;
+		    	});
+		    }
+
+			if (_this.player.canPlayType(curentVideo.type) != '') {
+				_this.$video.attr({	
+					'src' :  curentVideo.src,
+					'type': curentVideo.type
+				});
+			}
+			else {
+				/*_this.$video.attr({	
+					'src' :  curentVideo.src
+				});*/
+				_this.$video.append('<source src="' + curentVideo.src + '">')
+			}
+			_this.player.load();
+
+			//_this.$video.empty().append('<source src="' + curentVideo.src + '"' + typeStr + '>')
+			
+		}
+	}
 
 	player.setPlaylist = function(playlist) {}
 
