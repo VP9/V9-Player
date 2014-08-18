@@ -291,7 +291,12 @@ VP9.playerHTML5 = function(player) {
     	_this.$dur.html(duration);
     }
 
-    this.ui.setCurrentTime = function(currentTime, duration) {}
+    this.ui.setCurrentTime = function(currentTime, duration) {
+    	player.$playhead.css('width', currentTime / duration * 100 + '%');
+
+    	currentTime = player.timeToString(currentTime);
+    	_this.$elp.html(currentTime);
+    }
 
     this.ui.setStop = function() {}
 
