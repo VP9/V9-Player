@@ -355,7 +355,9 @@ VP9.playerHTML5 = function(player) {
     }
 
     var onStop = [];
-    player.onStop = function(func) {}
+    player.onStop = function(func) {
+    	onStop.push(func);
+    }
 
     var onSetVideo = [];
     player.onSetVideo = function(func) {}
