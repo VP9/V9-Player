@@ -545,7 +545,9 @@ VP9.playerHTML5 = function(player) {
 		}
 	}
 
-	player.getCurrentTime = function() {}
+	player.getCurrentTime = function() {
+		return _this.player.currentTime;
+	}
 
 	player.getState = function(state) {}
 
