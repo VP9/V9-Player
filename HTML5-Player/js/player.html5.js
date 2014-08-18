@@ -364,7 +364,14 @@ VP9.playerHTML5 = function(player) {
     	onSetVideo.push(func);
     }
 
-    player.onTimeupdate = function(func) {}
+    player.onTimeupdate = function(func) {
+    	_this.player.addEventListener('timeupdate', function() {
+			if (_this.player.paused) {
+				return false;
+			}
+    		func.call(this, _this.player.currentTime);
+    	});
+    }
 
     player.onError = function(func) {}
 
