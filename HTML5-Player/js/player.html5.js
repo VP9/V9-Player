@@ -346,7 +346,9 @@ VP9.playerHTML5 = function(player) {
 		});
     }
 
-    player.onPause = function(func) {}
+    player.onPause = function(func) {
+    	_this.player.addEventListener('pause', func);
+    }
 
     player.onEnded = function(func) {}
 
