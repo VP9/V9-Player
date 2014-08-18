@@ -39,6 +39,28 @@ VP9.playerHTML5 = function(player) {
 	}
 
 	this.destroy = function() {
+		player.$display = $('<div class="ppdisplay"></div>').appendTo(player.$player);
+		player.$media = $('<div id="' + player.id + '_media"></div>')
+			.css({
+				overflow: 'hidden',
+				height: '100%',
+				width: '100%',
+				top: '0px',
+				left: '0px',
+				padding: '0px',
+				margin: '0px',
+				display: 'block'
+			})
+			.appendTo(player.$display);
+
+		player.$start = $('<div class="ppstart" style="display:none"></div>')
+			.on('click', function(event) {
+				event.preventDefault();
+				player.$playBtn.click();
+			})
+			.appendTo(player.$display);
+
+		player.$buffering = $('<div class="ppbuffering_" style="display:none"></div>').appendTo(player.$display);
 	}
 
 	this.creatDisplay = function() {}
