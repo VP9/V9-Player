@@ -38,7 +38,9 @@ VP9.playerHTML5 = function(player) {
 		player.setVideo(player.options.activeVideo);
 	}
 
-	this.destroy = function() {
+	this.destroy = function() {}
+
+	this.creatDisplay = function() {
 		player.$display = $('<div class="ppdisplay"></div>').appendTo(player.$player);
 		player.$media = $('<div id="' + player.id + '_media"></div>')
 			.css({
@@ -62,8 +64,6 @@ VP9.playerHTML5 = function(player) {
 
 		player.$buffering = $('<div class="ppbuffering_" style="display:none"></div>').appendTo(player.$display);
 	}
-
-	this.creatDisplay = function() {}
 
 	this.creatControls = function() {}
 
