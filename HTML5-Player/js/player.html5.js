@@ -298,7 +298,14 @@ VP9.playerHTML5 = function(player) {
     	_this.$elp.html(currentTime);
     }
 
-    this.ui.setStop = function() {}
+    this.ui.setStop = function() {
+    	_this.$dur.html('00:00:00');
+    	_this.$elp.html('00:00:00');
+    	player.$playhead.width(0);
+    	player.$buffering.show();
+		player.$prevBtn.removeClass('active').addClass('inactive');
+		player.$nextBtn.removeClass('active').addClass('inactive');
+    }
 
     this.ui.setVideo = function(id) {}
 
