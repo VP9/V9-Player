@@ -131,7 +131,91 @@ VP9.playerHTML5 = function(player) {
 	}
 
     this.ui = {};
-    this.ui.onEvent = function() {}
+    this.ui.onEvent = function() {
+		_this.player.addEventListener('play', function() {
+			player.$start.hide();
+			player.$playBtn.addClass('pause');
+			player.$controls.removeClass('lock');
+		});
+
+		_this.player.addEventListener('pause', function() {
+			_this.state = 'PAUSED';
+			player.$start.show();
+			player.$playBtn.removeClass('pause');
+			player.$controls.addClass('lock');
+		});
+
+		_this.player.addEventListener('durationchange', function() {
+			_this.ui.setDuration(_this.player.duration);
+		});
+
+		_this.player.addEventListener('loadedmetadata', function() {
+			player.$playBtn.removeClass('disabled');
+			player.$start.show();
+		});	
+
+		_this.player.addEventListener('timeupdate', function() {
+			_this.ui.setCurrentTime(_this.player.currentTime, _this.player.duration);
+		});
+
+		_this.player.addEventListener('canplay', function() {
+			player.$buffering.hide();
+			// player.$start.hide();
+		});
+	    _this.player.addEventListener('canplaythrough', function() {
+			player.$buffering.hide();
+			// player.$start.hide();
+		});
+	    _this.player.addEventListener('playing', function() {
+			_this.state = 'PLAYING';
+			player.$buffering.hide();
+			player.$start.hide();
+			player.$playBtn.addClass('pause');
+		});
+	    _this.player.addEventListener('seeking', function() {
+			player.$buffering.show();
+		});
+
+	    _this.player.addEventListener('seeked', function() {
+			player.$buffering.hide();
+		});
+
+	    _this.player.addEventListener('error', function() {
+			_this.state = 'ERROR';
+			player.$buffering.show();
+			player.$start.hide();
+		});
+		
+	    _this.player.addEventListener('stalled', function() {
+
+		});
+	    _this.player.addEventListener('suspend', function() {
+
+		});
+		
+	    _this.player.addEventListener('ended', function() {
+			_this.state = 'COMPLETED';
+			player.$buffering.hide();
+			player.$start.hide();
+
+			player.ui.setStop();
+			if (player.options.autoNext) {
+				player.setVideo('next');
+			}
+		});
+
+	    _this.player.addEventListener('waiting', function() {
+			player.$buffering.show();
+			player.$start.hide();
+		});
+
+		if (!player.options.tagClick) {
+			_this.$video.on('click', function(event) {
+				event.preventDefault();
+				event.stopPropagation();
+			});
+		}
+    }
 
     this.ui.resume = function() {}
 
