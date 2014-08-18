@@ -350,7 +350,9 @@ VP9.playerHTML5 = function(player) {
     	_this.player.addEventListener('pause', func);
     }
 
-    player.onEnded = function(func) {}
+    player.onEnded = function(func) {
+    	_this.player.addEventListener('ended', func);
+    }
 
     var onStop = [];
     player.onStop = function(func) {}
