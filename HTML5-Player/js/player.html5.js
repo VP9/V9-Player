@@ -538,7 +538,12 @@ VP9.playerHTML5 = function(player) {
     	}
     }
 
-	player.getCurrentVideo = function() {}
+	player.getCurrentVideo = function() {
+		return {
+			index: player.activeVideo,
+			duration: _this.player.duration
+		}
+	}
 
 	player.getCurrentTime = function() {}
 
