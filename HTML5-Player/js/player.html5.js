@@ -398,7 +398,23 @@ VP9.playerHTML5 = function(player) {
 		}
 	}
 
-	player.setStop = function() {}
+	player.setStop = function() {
+		try {
+			_this.player.pause();
+			_this.$video.remove();
+		}
+		catch (e) {}
+
+		player.ui.setStop();
+		_this.ui.setStop();
+
+    	$.each(onStop, function(k, func) {
+    		func.call(this);
+    	});
+
+    	onStop = [];
+		_this.state = 'STOPPED';
+	}
 
 	player.setSeek = function(time) {}
 
