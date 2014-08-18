@@ -416,7 +416,10 @@ VP9.playerHTML5 = function(player) {
 		_this.state = 'STOPPED';
 	}
 
-	player.setSeek = function(time) {}
+	player.setSeek = function(time) {
+		_this.player.currentTime = time;
+		_this.ui.setCurrentTime(time, _this.player.duration);
+	}
 
 	player.setVideo = function(item, seekTime) {}
 
