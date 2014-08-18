@@ -549,7 +549,14 @@ VP9.playerHTML5 = function(player) {
 		return _this.player.currentTime;
 	}
 
-	player.getState = function(state) {}
+	player.getState = function(state) {
+		if (state) {
+			return state == _this.state;
+		}
+		else {
+			return _this.state;
+		}
+	}
 
     this.init();
 }
