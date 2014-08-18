@@ -373,7 +373,9 @@ VP9.playerHTML5 = function(player) {
     	});
     }
 
-    player.onError = function(func) {}
+    player.onError = function(func) {
+    	_this.player.addEventListener('error', func);
+    }
 
     player.onSeeking = function(func) {}
 
