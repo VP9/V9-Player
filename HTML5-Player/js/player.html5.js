@@ -217,7 +217,25 @@ VP9.playerHTML5 = function(player) {
 		}
     }
 
-    this.ui.resume = function() {}
+    this.ui.resume = function() {
+    	_this.$video.on('error', function() {
+			if (_this.player.networkState == 0) {
+				player.reconnect = setTimeout(function() {
+					player.$mesgBar.html('Lỗi kết nối! Kết nối lại sau 3s');
+					_this.$video.attr('src', _this.$video.attr('src').split('#')[0] + '#t=' + _this.player.currentTime);
+					_this.player.load();
+					//_this.setVideo()
+				}, 3000);
+			}
+			else if (_this.player.networkState == 3) {
+				player.reconnect = setTimeout(function() {
+					player.$mesgBar.html('Lỗi kết nối! Kết nối lại sau 3s');
+					_this.$video.attr('src', _this.$video.attr('src'));
+					_this.player.load();
+				}, 3000);
+			}
+		});
+    }
 
     this.ui.autoPlay = function() {}
 
