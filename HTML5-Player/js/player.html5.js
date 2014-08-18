@@ -65,7 +65,70 @@ VP9.playerHTML5 = function(player) {
 		player.$buffering = $('<div class="ppbuffering_" style="display:none"></div>').appendTo(player.$display);
 	}
 
-	this.creatControls = function() {}
+	this.creatControls = function() {
+		player.$controls = $('<div class="ppcontrols"><ul class="left nav"></ul><ul class="right"></ul><ul class="bottom"></ul></div>')
+			.appendTo(player.$player);
+
+		if ($.inArray('fullscreen', player.options.controls) >= 0 && window.screenfull) {
+			player.addControl('fsExitBtn', '<div class="ppfsexit inactive"></div>', '.right')
+				.on('click', function(event) {
+					event.preventDefault();
+					screenfull.exit();
+					player.$fsExitBtn.removeClass('active').addClass('inactive');
+					player.$fsEnterBtn.removeClass('inactive').addClass('active');
+				});
+			player.addControl('fsEnterBtn', '</div><div class="ppfsenter active"></div>', '.right')
+				.on('click', function(event) {
+					event.preventDefault();
+					screenfull.request();
+					player.$fsExitBtn.removeClass('inactive').addClass('active');
+					player.$fsEnterBtn.removeClass('active').addClass('inactive');
+				});
+		}
+
+		if ($.inArray('timeleft', player.options.controls) >= 0) {
+			player.addControl('timeleftBar', '<div class="pptimeleft"><span class="ppelp">00:00:00</span> | <span class="ppdur">00:00:00</span></div>', '.right');
+
+	    	_this.$dur = player.$timeleftBar.find('.ppdur');
+	    	_this.$elp = player.$timeleftBar.find('.ppelp');
+		}
+
+		if ($.inArray('progress', player.options.controls) >= 0) {
+			player.addControl('progressBar', '<div class="ppscrubber" ><div class="pploaded"></div><div class="ppplayhead" style="width: 0%;"></div><div class="ppscrubberknob" ></div><div class="ppscrubberdrag"></div></div>', '.bottom');
+
+			player.$playhead = player.$progressBar.find('.ppplayhead');
+			player.$scrubberdrag = player.$progressBar.find('.ppscrubberdrag')
+				.on('click', function(event) {
+					event.preventDefault();
+					if (_this.player.readyState == 0) {
+						return false;
+					} 
+
+		            var x = $(this).offset().left;
+		            var dx = event.clientX - x;
+		            var widthSlider = $(this).width();
+		            var seekTime = dx * _this.player.duration / widthSlider;
+					_this.ui.setCurrentTime(seekTime, _this.player.duration);
+		            _this.player.currentTime = seekTime;
+				});
+		}
+
+		if ($.inArray('next', player.options.controls) >= 0) {
+			player.addControl('nextBtn', '<div class="ppnext inactive"></div>', '.right')
+				.on('click', function(event) {
+					event.preventDefault();
+					player.setVideo('next');
+				});
+		}
+
+		if ($.inArray('prev', player.options.controls) >= 0) {
+			player.addControl('prevBtn', '<div class="ppprev inactive"></div>', '.right')
+				.on('click', function(event) {
+					event.preventDefault();
+					player.setVideo('prev');
+				});
+		}
+	}
 
     this.ui = {};
     this.ui.onEvent = function() {}
