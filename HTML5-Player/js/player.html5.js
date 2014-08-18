@@ -237,7 +237,24 @@ VP9.playerHTML5 = function(player) {
 		});
     }
 
-    this.ui.autoPlay = function() {}
+    this.ui.autoPlay = function() {
+    	_this.player.addEventListener('loadedmetadata', function() {
+			if (player.options.autoplay) {
+				if (player.options.cordova) {
+					cordova.exec(
+						function (data) {},
+						function (error) {},
+						"HandlerEventPlugin",
+						"playVideo",
+						[]
+					);
+				}
+				else {
+					_this.player.play();
+				}
+			}
+		});
+    }
 
     this.ui.scale = function() {}
 
