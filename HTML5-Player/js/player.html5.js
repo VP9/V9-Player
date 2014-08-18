@@ -377,7 +377,9 @@ VP9.playerHTML5 = function(player) {
     	_this.player.addEventListener('error', func);
     }
 
-    player.onSeeking = function(func) {}
+    player.onSeeking = function(func) {
+    	_this.player.addEventListener('seeking', func);
+    }
 
     player.onSeeked = function(func) {}
 
