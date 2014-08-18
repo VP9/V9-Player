@@ -334,7 +334,17 @@ VP9.playerHTML5 = function(player) {
     	_this.player.addEventListener('play', func);
     }
 
-    player.onFirstPlay = function(func) {}
+    player.onFirstPlay = function(func) {
+		_this.$video.one('timeupdate', function() {
+			if (this.currentTime > 0) {
+				func.call(this);
+			}
+			else {
+				this.ui.hideControls();
+				player.onFirstPlay(func);
+			}
+		});
+    }
 
     player.onPause = function(func) {}
 
