@@ -381,7 +381,9 @@ VP9.playerHTML5 = function(player) {
     	_this.player.addEventListener('seeking', func);
     }
 
-    player.onSeeked = function(func) {}
+    player.onSeeked = function(func) {
+    	_this.player.addEventListener('seeked', func);
+    }
 
     //methods
     player.setPlay = function() {}
