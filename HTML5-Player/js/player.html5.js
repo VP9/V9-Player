@@ -275,7 +275,16 @@ VP9.playerHTML5 = function(player) {
     }
 
 	_this.ui.hideTimeout = null;
-    this.ui.hideControls = function() {}
+    this.ui.hideControls = function() {
+    	player.$player.on('mousemove', function(event) {
+    		player.$player.off('mousemove');
+    		player.$controls.removeClass('inactive').addClass('active');
+    		_this.ui.hideTimeout = setTimeout(function() {
+				player.$controls.removeClass('active').addClass('inactive');
+				_this.ui.hideControls();
+			}, 5000);
+    	});
+   	}
 
     this.ui.setDuration = function(duration) {};
 
