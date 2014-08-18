@@ -487,7 +487,13 @@ VP9.playerHTML5 = function(player) {
 		}
 	}
 
-	player.setPlaylist = function(playlist) {}
+	player.setPlaylist = function(playlist) {
+		player.setStop();
+		player.options.playlist = playlist;
+		_this.playlist = player.options.playlist.filter(function(item) {
+			return item;
+		});
+	}
 
 
 	player.setAutoNext = function(auto) {}
