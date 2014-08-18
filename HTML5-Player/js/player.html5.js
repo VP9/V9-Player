@@ -286,7 +286,10 @@ VP9.playerHTML5 = function(player) {
     	});
    	}
 
-    this.ui.setDuration = function(duration) {};
+    this.ui.setDuration = function(duration) {
+    	duration = player.timeToString(duration);
+    	_this.$dur.html(duration);
+    }
 
     this.ui.setCurrentTime = function(currentTime, duration) {}
 
