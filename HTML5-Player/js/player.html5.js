@@ -305,9 +305,26 @@ VP9.playerHTML5 = function(player) {
     	player.$buffering.show();
 		player.$prevBtn.removeClass('active').addClass('inactive');
 		player.$nextBtn.removeClass('active').addClass('inactive');
-    }
+    	}
 
-    this.ui.setVideo = function(id) {}
+    this.ui.setVideo = function(id) {
+		if (_this.playlist.length <= 1) {
+			player.$prevBtn.removeClass('active').addClass('inactive');
+			player.$nextBtn.removeClass('active').addClass('inactive');
+		}
+    	else if (player.options.playlist[id] == _this.playlist[0]) {
+			player.$prevBtn.removeClass('active').addClass('inactive');
+			player.$nextBtn.removeClass('inactive').addClass('active');
+    	}
+    	else if (player.options.playlist[id] == _this.playlist[_this.playlist.length - 1]) {
+			player.$prevBtn.removeClass('inactive').addClass('active');
+			player.$nextBtn.removeClass('active').addClass('inactive');
+    	}
+    	else {
+			player.$prevBtn.removeClass('inactive').addClass('active');
+			player.$nextBtn.removeClass('inactive').addClass('active');
+    	}
+    }
 
 
     //Events
