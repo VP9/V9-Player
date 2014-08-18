@@ -509,7 +509,34 @@ VP9.playerHTML5 = function(player) {
     	return player.options.playlist.length - 1;
     }
 
-    player.removeItem = function(data) {}
+    player.removeItem = function(data) {
+    	var index;
+    	if ($.isNumeric(data)) {
+    		index = data;
+    	}
+    	else {
+    		index = $.inArray(data, player.options.playlist);
+    	}
+    	if (index >= 0) {
+			_this.playlist = player.options.playlist.filter(function(item) {
+				return item;
+			});
+    		if (index == player.activeVideo) {
+    			//console.log('can not remove item when playing');
+    			return false;
+    		}
+    		else {
+    			//delete player.options.playlist[index];
+    			player.options.playlist.splice(index,1)
+	    		_this.ui.setVideo(player.activeVideo);
+	    		return index;
+	    	}
+    	}
+    	else {
+    		return false;
+    		//console.log('delete item not live');
+    	}
+    }
 
 	player.getCurrentVideo = function() {}
 
