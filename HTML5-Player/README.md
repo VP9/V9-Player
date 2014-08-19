@@ -37,4 +37,4 @@ Usage: <pre>player.&lt;method&gt;(&lt;arguments&gt;)</pre>
 - removeItem
 
 <h2>LICENSE</h2>
-VP9TV-PLAYER is licensed under the Mozilla Public License, Version 2.0. View the <a href="https://github.com/maxinminax/VP9.player/blob/master/LICENSE">license file</a>
+VP9TV-PLAYER is licensed under the Mozilla Public License, Version 2.0. View the <a href="https://github.com/VP9/VP9TV/blob/master/HTML5-Player/LICENSE">license file</a>
